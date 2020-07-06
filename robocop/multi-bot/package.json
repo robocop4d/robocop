@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "express": "^4.15.2",
+    "express-ws": "^3.0.0",
+    "firmata": "^0.15.0",
+    "raspivid-stream": "^0.2.1",
+    "serialport": "^4.0.7",
+    "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "xo": "^0.17.1"
+  },
+  "scripts": {
+    "getRobbyIp": "nmap -p 2221 --open -oG - `ifconfig en0 | awk '$1 == \"inet\" {print $2}'`/24 | awk '/2221\\/open/ {print $2}'",
+    "sync": "remote-code -p 2221 pi@`npm run --silent getRobbyIp` -i ~/.ssh/id_pi -I 'npm install && cd web && npm install' -v"
+  }
+}
